@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Typography, Button, TextareaAutosize, TextField } from "@mui/material";
+import React, { useState } from "react";
+import { Typography, Button, TextareaAutosize } from "@mui/material";
 
 const LocalStorage = ({ initialState, setInitialState }) => {
   const { testLocalStorage } = initialState;

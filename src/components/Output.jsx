@@ -5,8 +5,7 @@ import LocalStorage from "./LocalStorage";
 
 //destructure props object
 //create children components so that each hold their own state
-//this will ensure that any updates will only force a re-render on that component
-//and therefore the other components state will remain onscreen.
+//this will ensure that any changes in state will only force a re-render on that component
 const Output = ({ initialState, setInitialState }) => {
   return (
     <>
