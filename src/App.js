@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Output from "./components/Output";
 
 function App() {
   // check query string expected default values
   const params = new URLSearchParams(window.location.search);
-
-  //create a callback function to handle our different pieces of state
   const getDefaultState = (key) => {
     let state;
     switch (key) {
@@ -31,15 +29,24 @@ function App() {
     }
   };
 
+  //construct your state using callback
   const [initialState, setInitialState] = useState({
     queryString: getDefaultState("queryString"),
     dataArray: getDefaultState("dataArray"),
-    localStorage: getDefaultState("localStorage"),
+    testLocalStorage: getDefaultState("localStorage"),
   });
+
+  //keep state and localStorage in sync
+  useEffect(() => {
+    localStorage.setItem(
+      "exampleLocal",
+      JSON.stringify(initialState.testLocalStorage)
+    );
+  }, [initialState.testLocalStorage]);
 
   return (
     <div className="App">
-      <Output initialState={initialState} />
+      <Output initialState={initialState} setInitialState={setInitialState} />
     </div>
   );
 }
