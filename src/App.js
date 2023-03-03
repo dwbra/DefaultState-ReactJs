@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Output from "./components/Output";
+import DefaultStateHook from "./hooks/DefaultStateHook";
 
 function App() {
+  const { data, status, error, setDefaultStateHook } = DefaultStateHook({
+    urlParams: true,
+    localStorage: true,
+  });
+
   // check query string expected default values
   const params = new URLSearchParams(window.location.search);
   const getDefaultState = (key) => {
@@ -17,6 +23,7 @@ function App() {
             ? JSON.parse(decodeURIComponent(params.get("data"))) //turn the JSON string into valid js, then decode
             : []);
         } catch (error) {
+          //if a user tries to enter an invalid URI string, catch the error and store in state
           return (state = error);
         }
       case "localStorage":
