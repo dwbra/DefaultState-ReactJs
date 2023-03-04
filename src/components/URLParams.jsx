@@ -87,16 +87,14 @@ const URLParams = ({ urlParamsData }) => {
       <Button variant="contained" type="submit" onClick={handleArrayData}>
         Generate Array URI encoded JSON string
       </Button>
-      <Typography pt="10px" pb="10px">
-        <p>Test array output:</p>
-        {urlParamsData &&
-          urlParamsData?.arr.map((item, index) => (
-            <>
-              <strong>{`${index}: ${item} ` || ""}</strong>
-              <br />
-            </>
-          ))}
-      </Typography>
+      <p>Test array output:</p>
+      {urlParamsData &&
+        urlParamsData?.arr.map((item, index) => (
+          <Typography key={index} pt="10px" pb="10px">
+            <strong>{`${index}: ${item} ` || ""}</strong>
+            <br />
+          </Typography>
+        ))}
     </>
   );
 };

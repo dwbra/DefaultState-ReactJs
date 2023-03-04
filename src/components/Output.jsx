@@ -6,12 +6,7 @@ import LocalStorage from "./LocalStorage";
 //destructure props object
 //create children components so that each hold their own state
 //this will ensure that any changes in state will only force a re-render on that component
-const Output = ({
-  urlParamsData,
-  localStorageData,
-  setUrlParams,
-  setLocalStorage,
-}) => {
+const Output = ({ urlParamsData, localStorageData, updateLocalStorage }) => {
   return (
     <>
       <Container>
@@ -31,7 +26,7 @@ const Output = ({
           <Box flex="1 0 50%" textAlign="left">
             <LocalStorage
               localStorageData={localStorageData}
-              setLocalStorage={setLocalStorage}
+              updateLocalStorage={updateLocalStorage}
             />
           </Box>
         </Box>

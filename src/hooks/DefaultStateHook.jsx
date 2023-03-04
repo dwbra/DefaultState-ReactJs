@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useReducer, useRef } from "react";
 import defaultStateReducer from "../reducers/defaultStateReducer";
-import { isDecodedJson } from "../helpers/helperFunctions";
+import { isDecodedJson, isJson } from "../helpers/helperFunctions";
 
 const DefaultStateHook = (props) => {
   const params = new URLSearchParams(window.location.search);
@@ -19,31 +19,38 @@ const DefaultStateHook = (props) => {
     }
   }
 
-  let localStorageData = [];
+  let testJBOD = {
+    exampleLocal: ["key", "val"],
+    defaultLocal: ["key2", "val2"],
+  };
+  console.log(JSON.stringify(testJBOD));
+
+  let localStorageData = {};
   if (props.localStorageNames.length > 0) {
     props.localStorageNames.forEach((name) => {
       let l = JSON.parse(localStorage.getItem(name));
-      if (l !== null) {
-        localStorageData.push({ [name]: JSON.parse(l) });
+      console.log(l);
+      if (isJson(l)) {
+        if (l !== null) {
+          Object.assign(localStorageData, { [name]: JSON.parse(l) });
+        } else {
+          console.error("name does not exist in localStorage");
+        }
       } else {
-        console.error("name does not exist in localStorage");
+        console.error("not valid JSON");
       }
     });
   }
 
-  const setUrlParams = (payload) =>
-    dispatchDefaultState({ type: "setUrlParams", payload });
-
-  const setLocalStorage = (payload) =>
-    dispatchDefaultState({ type: "setLocalStorage", payload });
+  const updateLocalStorage = (payload) =>
+    dispatchDefaultState({ type: "updateLocalStorage", payload });
 
   const initialState = {
     status: props ? "loading" : "idle",
     error: null,
     urlParamsData: null,
     localStorageData: null,
-    setUrlParams: setUrlParams,
-    setLocalStorage: setLocalStorage,
+    updateLocalStorage: updateLocalStorage,
   };
 
   // Setup our state and actions

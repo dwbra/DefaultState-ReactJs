@@ -7,6 +7,11 @@ const defaultStateReducer = (state, { type, payload }) => {
       return { ...stateCopy, urlParamsData: payload };
     case "setLocalStorage":
       return { ...stateCopy, localStorageData: payload };
+    case "updateLocalStorage":
+      let { newState, localName } = payload;
+      let currentLocalState = stateCopy.localStorageData;
+      currentLocalState[[localName]] = newState;
+      return { ...stateCopy, localStorageData: currentLocalState };
     default:
       return state;
   }

@@ -3,26 +3,21 @@ import Output from "./components/Output";
 import DefaultStateHook from "./hooks/DefaultStateHook";
 
 function App() {
-  const {
-    status,
-    error,
-    urlParamsData,
-    localStorageData,
-    setUrlParams,
-    setLocalStorage,
-  } = DefaultStateHook({
-    urlParams: true,
-    localStorage: true,
-    localStorageNames: ["exampleLocal", "defaultLocal"],
-  });
+  const { status, error, urlParamsData, localStorageData, updateLocalStorage } =
+    DefaultStateHook({
+      urlParams: true,
+      localStorage: true,
+      localStorageNames: ["exampleLocal"],
+    });
+
+  // console.log(localStorageData);
 
   return (
     <div className="App">
       <Output
         urlParamsData={urlParamsData}
         localStorageData={localStorageData}
-        setUrlParams={setUrlParams}
-        setLocalStorage={setLocalStorage}
+        updateLocalStorage={updateLocalStorage}
       />
     </div>
   );
