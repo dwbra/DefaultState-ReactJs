@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { Typography, Button, TextareaAutosize } from "@mui/material";
 
-const LocalStorage = ({ initialState, setInitialState }) => {
-  const { testLocalStorage } = initialState;
-  const [localState, setLocalState] = useState([]);
+const LocalStorage = ({ localStorageData, setLocalStorage }) => {
+  const [localState, setLocalState] = useState({});
 
   const handleLocalStorageClick = () => {
-    setInitialState({ ...initialState, testLocalStorage: localState });
+    setLocalStorage({
+      ...localStorageData,
+      exampleLocal: JSON.parse(localState),
+    });
   };
 
   return (
@@ -35,7 +37,13 @@ const LocalStorage = ({ initialState, setInitialState }) => {
       </Button>
       <Typography pt="10px" pb="10px">
         <p>Test localStorage output:</p>
-        {testLocalStorage.length > 0 && <strong>{testLocalStorage}</strong>}
+        {localStorageData &&
+          Object.values(localStorageData).map((item, index) => (
+            <>
+              <strong key={index}>{` ${index}: ${item}`}</strong>
+              <br />
+            </>
+          ))}
       </Typography>
     </>
   );

@@ -6,7 +6,12 @@ import LocalStorage from "./LocalStorage";
 //destructure props object
 //create children components so that each hold their own state
 //this will ensure that any changes in state will only force a re-render on that component
-const Output = ({ initialState, setInitialState }) => {
+const Output = ({
+  urlParamsData,
+  localStorageData,
+  setUrlParams,
+  setLocalStorage,
+}) => {
   return (
     <>
       <Container>
@@ -21,12 +26,12 @@ const Output = ({ initialState, setInitialState }) => {
 
         <Box display="flex" gap="20px" mt="30px" mb="10px">
           <Box flex="1 0 50%" textAlign="left">
-            <URLParams initialState={initialState} />
+            <URLParams urlParamsData={urlParamsData} />
           </Box>
           <Box flex="1 0 50%" textAlign="left">
             <LocalStorage
-              initialState={initialState}
-              setInitialState={setInitialState}
+              localStorageData={localStorageData}
+              setLocalStorage={setLocalStorage}
             />
           </Box>
         </Box>

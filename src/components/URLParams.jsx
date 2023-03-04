@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Typography, Button, TextareaAutosize, TextField } from "@mui/material";
 
-const URLParams = ({ initialState }) => {
-  const { queryString, dataArray } = initialState;
+const URLParams = ({ urlParamsData }) => {
   const [localComponentState, setLocalComponentState] = useState({
     q: "",
+    int: 0,
     arr: [],
   });
 
@@ -12,7 +12,7 @@ const URLParams = ({ initialState }) => {
     const uriEncoded = encodeURIComponent(
       JSON.stringify(localComponentState.q)
     );
-    const uriString = `?query=${uriEncoded}`;
+    const uriString = uriEncoded;
     //https://developer.mozilla.org/en-US/docs/Web/API/Clipboard/writeText
     navigator.clipboard
       .writeText(uriString)
@@ -25,10 +25,8 @@ const URLParams = ({ initialState }) => {
   };
 
   const handleArrayData = () => {
-    const uriEncoded = encodeURIComponent(
-      JSON.stringify(localComponentState.arr)
-    );
-    const uriString = `?data=${uriEncoded}`;
+    const uriEncoded = encodeURIComponent(localComponentState.arr);
+    const uriString = uriEncoded;
     navigator.clipboard
       .writeText(uriString)
       .then(() => {
@@ -65,12 +63,10 @@ const URLParams = ({ initialState }) => {
       <Button variant="contained" type="submit" onClick={handleQueryString}>
         Generate Query URI encoded JSON string
       </Button>
-
       <Typography pt="10px" pb="10px">
-        <p>Test query output:</p>
-        {queryString.length > 0 && <strong>{queryString}</strong>}
+        <p>Test query string output:</p>
+        {urlParamsData?.query && <strong>{urlParamsData?.query || ""}</strong>}
       </Typography>
-
       <Typography>
         <strong>Array Testing</strong> - To test url params state with multiple
         values,
@@ -92,8 +88,14 @@ const URLParams = ({ initialState }) => {
         Generate Array URI encoded JSON string
       </Button>
       <Typography pt="10px" pb="10px">
-        <p>Test dataArray output:</p>
-        {dataArray.length > 0 && <strong>{dataArray}</strong>}
+        <p>Test array output:</p>
+        {urlParamsData &&
+          urlParamsData?.arr.map((item, index) => (
+            <>
+              <strong>{`${index}: ${item} ` || ""}</strong>
+              <br />
+            </>
+          ))}
       </Typography>
     </>
   );
