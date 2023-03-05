@@ -7,7 +7,7 @@ function App() {
     DefaultStateHook({
       urlParams: true,
       localStorage: true,
-      localStorageNames: ["exampleLocal"],
+      localStorageNames: ["exampleLocal", "test"],
     });
 
   // console.log(localStorageData);

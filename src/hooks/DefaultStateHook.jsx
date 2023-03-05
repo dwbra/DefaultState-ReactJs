@@ -19,20 +19,20 @@ const DefaultStateHook = (props) => {
     }
   }
 
-  let testJBOD = {
-    exampleLocal: ["key", "val"],
-    defaultLocal: ["key2", "val2"],
-  };
-  console.log(JSON.stringify(testJBOD));
+  //   let testJBOD = {
+  //     exampleLocal: ["key", "val"],
+  //     defaultLocal: ["key2", "val2"],
+  //   };
+  //   console.log(JSON.stringify(testJBOD));
 
   let localStorageData = {};
   if (props.localStorageNames.length > 0) {
     props.localStorageNames.forEach((name) => {
-      let l = JSON.parse(localStorage.getItem(name));
-      console.log(l);
+      let l = localStorage.getItem(name);
       if (isJson(l)) {
-        if (l !== null) {
-          Object.assign(localStorageData, { [name]: JSON.parse(l) });
+        let f = JSON.parse(l);
+        if (f !== null) {
+          Object.assign(localStorageData, { [name]: f });
         } else {
           console.error("name does not exist in localStorage");
         }
@@ -76,19 +76,6 @@ const DefaultStateHook = (props) => {
       });
     }
   }, []);
-
-  //keep state and localStorage in sync
-  //   const firstRender = useRef(true);
-  //   useEffect(() => {
-  //     if (firstRender.current) {
-  //       firstRender.current = false;
-  //       return;
-  //     }
-  //     localStorage.setItem(
-  //       "exampleLocal",
-  //       JSON.stringify(defaultState.localStorageData)
-  //     );
-  //   }, [defaultState.localStorageData]);
 
   return defaultState;
 };
