@@ -1,4 +1,4 @@
-# DefaultStateHook App
+# DefaultStateHook - A Custom ReactJS Hook
 
 ### I've created a custom React Hook to help you automatically retrieve and set some state for use in your application from query parameters and localStorage.
 
