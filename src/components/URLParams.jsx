@@ -8,6 +8,11 @@ const URLParams = ({ urlParamsData }) => {
     arr: [],
   });
 
+  let urlParamsDataArr = [];
+  if (urlParamsData !== null) {
+    urlParamsDataArr = Object.entries(urlParamsData);
+  }
+
   const handleQueryString = () => {
     const uriEncoded = encodeURIComponent(
       JSON.stringify(localComponentState.q)
@@ -88,8 +93,8 @@ const URLParams = ({ urlParamsData }) => {
         Generate Array URI encoded JSON string
       </Button>
       <p>Test array output:</p>
-      {urlParamsData &&
-        urlParamsData?.arr.map((item, index) => (
+      {urlParamsData !== null &&
+        urlParamsDataArr.map((item, index) => (
           <Typography key={index} pt="10px" pb="10px">
             <strong>{`${index}: ${item} ` || ""}</strong>
             <br />

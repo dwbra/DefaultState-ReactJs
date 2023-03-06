@@ -16,8 +16,6 @@ const LocalStorage = ({ localStorageData, updateLocalStorage }) => {
     localStorage.setItem(`${payload.name}`, payload.data);
   };
 
-  console.log(localStorageData);
-
   return (
     <>
       <Typography variant="h5" mb="10px">

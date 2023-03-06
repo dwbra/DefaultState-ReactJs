@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer, useRef } from "react";
+import { useEffect, useReducer } from "react";
 import defaultStateReducer from "../reducers/defaultStateReducer";
 import { isDecodedJson, isJson } from "../helpers/helperFunctions";
 
@@ -18,12 +18,6 @@ const DefaultStateHook = (props) => {
       }
     }
   }
-
-  //   let testJBOD = {
-  //     exampleLocal: ["key", "val"],
-  //     defaultLocal: ["key2", "val2"],
-  //   };
-  //   console.log(JSON.stringify(testJBOD));
 
   let localStorageData = {};
   if (props.localStorageNames.length > 0) {

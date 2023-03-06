@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Output from "./components/Output";
 import DefaultStateHook from "./hooks/DefaultStateHook";
 
@@ -10,7 +10,11 @@ function App() {
       localStorageNames: ["exampleLocal", "test"],
     });
 
-  // console.log(localStorageData);
+  console.log({
+    urlParamsData: urlParamsData,
+    localStorageData: localStorageData,
+    updateLocalStorage: updateLocalStorage,
+  });
 
   return (
     <div className="App">

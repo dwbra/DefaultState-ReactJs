@@ -18,7 +18,6 @@ const Output = ({ urlParamsData, localStorageData, updateLocalStorage }) => {
             Follow the steps below to test this applications code.
           </Typography>
         </Box>
-
         <Box display="flex" gap="20px" mt="30px" mb="10px">
           <Box flex="1 0 50%" textAlign="left">
             <URLParams urlParamsData={urlParamsData} />
