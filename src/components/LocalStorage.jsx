@@ -1,12 +1,19 @@
 import React, { useState } from "react";
-import { Typography, Button, TextareaAutosize } from "@mui/material";
+import { Typography, Button, TextareaAutosize, TextField } from "@mui/material";
 
-const LocalStorage = ({ initialState, setInitialState }) => {
-  const { testLocalStorage } = initialState;
-  const [localState, setLocalState] = useState([]);
+const LocalStorage = ({ localStorageData, updateLocalStorage }) => {
+  const [localState, setLocalState] = useState({
+    name: "",
+    data: "",
+  });
 
   const handleLocalStorageClick = () => {
-    setInitialState({ ...initialState, testLocalStorage: localState });
+    const payload = {
+      name: localState.name,
+      data: localState.data,
+    };
+    updateLocalStorage(payload);
+    localStorage.setItem(`${payload.name}`, payload.data);
   };
 
   return (
@@ -20,23 +27,39 @@ const LocalStorage = ({ initialState, setInitialState }) => {
         This should add some test data into your localStorage. Once that has
         been stored, you should now see the localStorage being displayed.
       </Typography>
+      <TextField
+        id="outlined-basic"
+        label="Enter localStorage name you wish to update"
+        variant="outlined"
+        value={localState.name}
+        style={{ width: "100%", marginBottom: "10px", marginTop: "10px" }}
+        onChange={(event) => {
+          setLocalState({ ...localState, name: event.target.value });
+        }}
+      />
       <TextareaAutosize
         id="dataArrayInputField"
         style={{ width: "100%", marginBottom: "10px", marginTop: "10px" }}
         minRows={5}
-        placeholder="[]"
-        value={localState}
+        placeholder="{}"
+        value={localState.data}
         onChange={(event) => {
-          setLocalState(event.target.value);
+          setLocalState({ ...localState, data: event.target.value });
         }}
       />
       <Button variant="contained" onClick={handleLocalStorageClick}>
         Generate localStorage
       </Button>
-      <Typography pt="10px" pb="10px">
-        <p>Test localStorage output:</p>
-        {testLocalStorage.length > 0 && <strong>{testLocalStorage}</strong>}
-      </Typography>
+      <p>Test localStorage output:</p>
+      {localStorageData &&
+        Object.values(localStorageData).map((item, index) => {
+          return Object.values(item).map((d, i) => (
+            <Typography key={i} pt="10px" pb="10px">
+              <strong>{` ${i}: ${d}`}</strong>
+              <br />
+            </Typography>
+          ));
+        })}
     </>
   );
 };
